@@ -1,0 +1,16 @@
+name: Pipeline de Calidad con Docker
+
+on: [push]
+
+jobs:
+  probar-docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar codigo fuente
+        uses: actions/checkout@v3
+
+      - name: Construir la imagen de Docker
+        run: docker build -t mi-primera-web .
+
+      - name: Probar el contenedor
+        run: docker run -d -p 8080:80 mi-primera-web
